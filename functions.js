@@ -26,5 +26,5 @@ function* idGenerator() {
 let idGen = idGenerator();
 // When .next() is called, the Generator runs until the first
 // yield expression
-console.log(idGen.next().value);
-console.log(idGen.next().value);
+console.log(idGen.next().value); // 0
+console.log(idGen.next().value); // 1
