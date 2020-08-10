@@ -25,6 +25,8 @@ function* idGenerator() {
 
 let idGen = idGenerator();
 // When .next() is called, the Generator runs until the first
-// yield expression
+// yield expression. If there are multiple yield statements in
+// the function, then the next yield statement is run after each
+// generator.next() invokation.
 console.log(idGen.next().value); // 0
 console.log(idGen.next().value); // 1
