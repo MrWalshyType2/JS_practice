@@ -57,6 +57,13 @@ function maxThree() {
     let i = 0;
 
     while (i < arguments.length) {
+        if (arguments[i] == firstHighest ||
+            arguments[i] == secondHighest ||
+            arguments[i] == thirdHighest) {
+                i++
+                continue;
+        }
+
         if (arguments[i] > firstHighest) {
             thirdHighest = secondHighest;
             secondHighest = firstHighest;
@@ -80,5 +87,5 @@ function maxThree() {
 // varAdd(500, 1000, 2000);
 max(20, 30, 40, 20, 70, 20);
 max(150, 32, 24);
-maxThree(40, 20, 30, 70, 190, 10);
-maxThree(1024, 30, 576, 70, 800);
+maxThree(40, 20, 30, 70, 190, 10); // 190, 70, 40
+maxThree(1024, 30, 800,576, 70, 800); // 1024, 800, 576
