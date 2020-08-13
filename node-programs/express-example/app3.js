@@ -25,11 +25,11 @@ let doMath = (operation, x, y) => {
 // URL parameters are created in the request object
 app.get("/message/:name", (request, response) => {
     // The value located at the position of ':name' is a url parameter
-    response.send(`Hello ${request.params.name}`);
+    response.status(200).send(`Hello ${request.params.name}`);
 });
 
 app.get("/message/:name/:location", (request, response) => {
-    response.send(`${request.params.name} lives in ${request.params.location}`);
+    response.status(200).send(`${request.params.name} lives in ${request.params.location}`);
 });
 
 // localhost:8000/maths/add/2/4
@@ -41,7 +41,23 @@ app.get("/math/:operation/:x/:y", (request, response) => {
 
     const result = doMath(operation, x, y);
 
-    response.send(result.toString());
+    if (isNaN(result)) {
+        // Bad Request
+        response.status(400).send(result);
+    } else {
+        // OK
+        response.status(200).send(result.toString());
+    }
+});
+
+// Query Parameters start with ?, format: key=value, param separator: &
+let users = [];
+
+app.get("/query", (request, response) => {
+    const name = request.query.name;
+    const age = request.query.age;
+
+    response.send(`Name: ${name}, Age: ${age}`);
 });
 
 app.listen(port, () => {
