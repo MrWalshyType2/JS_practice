@@ -5,10 +5,23 @@ const port = 8000;
 
 let names = ["Fred", "Bob", "Gabriella", "Elron", "Stacy", "Darcy"];
 
+const logger = (request, response, next) => {
+    const logEntry = `Host: ${request.hostname}
+    IP: ${request.ip}
+    Method: ${request.method}
+    Path: ${request.path}
+    Time: ${new Date()}`;
+
+    console.log(logEntry);
+    next();
+}
+
 app.use(express.json());
+app.use(logger); // This middleware runs when a route is hit, this runs first
 
 app.route("/")
-    .get((request, response) => {
+    // logger runs when the route '/' is hit
+    .get(logger, (request, response) => {
         response.send("Hello, my name is !")
     });
 
