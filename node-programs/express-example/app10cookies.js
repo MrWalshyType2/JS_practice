@@ -9,7 +9,7 @@ const port = 8000;
 app.use(cookieParser());
 
 app.get("/", (request, response) => {
-    response.setHeader("Content-Type", "text/HTML");
+    response.writeHead(200, {"Content-Type" : "text/html"});
     // Setting a cookie called 'cookie_test' with a value of 'A test express cookie'
     response.cookie("cookie_test", "A test express cookie");
     response.write("<h3>I made a cookie</h3>");
@@ -17,7 +17,7 @@ app.get("/", (request, response) => {
 });
 
 app.get("/cookies", (request, response) => {
-    response.setHeader("Content-Type", "text/HTML");
+    response.writeHead(200, {"Content-Type" : "text/html"});
     response.write(`<p>The contents of 'cookie_test' is: ${request.cookies.cookie_test}</p>`);
     response.end();
 })
