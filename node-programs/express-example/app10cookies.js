@@ -16,11 +16,23 @@ app.get("/", (request, response) => {
     response.end("<p>End of cookie test</p>");
 });
 
+app.get("/colouredText", (request, response) => {
+    let colour = request.cookies.colour;
+    response.writeHead(200, {"Content-Type" : "text/html"});
+    response.write(`<h2 style='color:${colour}'>This text is coloured...</h2>`);
+});
+
 app.get("/cookies", (request, response) => {
     response.writeHead(200, {"Content-Type" : "text/html"});
     response.write(`<p>The contents of 'cookie_test' is: ${request.cookies.cookie_test}</p>`);
     response.end();
-})
+});
+
+app.get("/colour/:colour", (request, response) => {
+    let colour = request.params.colour;
+    response.cookie("colour", colour);
+    response.end(`Cookie created with colour: ${colour}`);
+});
 
 app.listen(port, () => {
     console.log(`Server listening on port: ${port}`);
